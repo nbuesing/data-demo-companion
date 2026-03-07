@@ -2,7 +2,7 @@
 
    * Install the DataGen Connector, this connector is used to generate fake data.
 
-     * The `./install-connector.sh` script does this for you, it will pull the connector from the internet using curl,
+     * The `./01-install-connector.sh` script does this for you, it will pull the connector from the internet using curl,
    and then unzipping it. This is done in the `kafka-1/connect-plugins` directory.
 
      * Verify by inspecting the directory.
@@ -30,7 +30,7 @@
       ```
 
       * If it is not installed, use various installers to install it (e.g. brew on MacOS). Or if you want to install it only for this this project, you can
-      run `install-jq.sh` which will place it in the demo's bin directory (that scripts will put on their classpath).
+      run `02-install-jq.sh` which will place it in the demo's bin directory (that scripts will put on their classpath).
 
       ```
       → ls -al bin
@@ -41,9 +41,9 @@
       -rwxr-xr-x@  1 buesing  staff  807984 Mar  3 09:55 jq
       ```
 
-1. up.sh -- to start kafka-1 and flink 
+1. 03-up.sh -- to start kafka-1 and flink 
 
-2. setup.sh 
+2. 04-setup.sh 
 
    a. copy the datagen avro file into the connector data directory
 

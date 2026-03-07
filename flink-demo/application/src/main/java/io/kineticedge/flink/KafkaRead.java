@@ -93,13 +93,24 @@ public class KafkaRead {
     DataStream<Tuple2<OrderKey, Order>> orderStream =
             env.fromSource(source, WatermarkStrategy.forBoundedOutOfOrderness(Duration.ofSeconds(5)), "DatagenOrders-1");
 
-    DataStream<Tuple2<OrderKey, OrderEnriched>> enrichStream =
-            env.fromSource(source2, WatermarkStrategy.forBoundedOutOfOrderness(Duration.ofSeconds(5)), "DatagenOrders-2");
+//    DataStream<Tuple2<OrderKey, OrderEnriched>> enrichStream =
+//            env.fromSource(source2, WatermarkStrategy.forBoundedOutOfOrderness(Duration.ofSeconds(5)), "DatagenOrders-2");
 
     orderStream
             .map(order -> new Tuple2<OrderKey, PurchaseOrder>(order.f0, convert(order.f1)))
             .sinkTo(sink2);
 
+//    orderStream.join(enrichStream)
+//        .where(tuple -> tuple.f0)
+//        .equalTo(tuple -> tuple.f0)
+//        .window(TumblingEventTimeWindows.of(Time.seconds(30)))
+//        .apply(new JoinFunction<Tuple2<OrderKey, Order>, Tuple2<OrderKey, OrderEnriched>, Tuple2<OrderKey, PurchaseOrder>>() {
+//            @Override
+//            public Tuple2<OrderKey, PurchaseOrder> join(Tuple2<OrderKey, Order> first, Tuple2<OrderKey, OrderEnriched> second) {
+//                PurchaseOrder po = convert(first.f1, second.f1.getEnriched());
+//                return new Tuple2<>(first.f0, po);
+//            }
+//        }).sinkTo(sink2);
 
     env.execute();
 
