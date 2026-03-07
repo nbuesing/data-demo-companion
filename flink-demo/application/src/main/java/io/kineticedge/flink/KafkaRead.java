@@ -10,6 +10,7 @@ import io.kineticedge.order.OrderLineItem;
 import io.kineticedge.purchaseorder.PurchaseOrder;
 import io.kineticedge.purchaseorder.PurchaseOrderLineItem;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.typeutils.TupleTypeInfo;
@@ -19,6 +20,8 @@ import org.apache.flink.connector.kafka.source.KafkaSource;
 import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.kafka.clients.consumer.OffsetResetStrategy;
 
 import java.time.Duration;
@@ -99,6 +102,7 @@ public class KafkaRead {
                 // |.returns| needed as a result
                 .returns(new TupleTypeInfo<>(TypeInformation.of(OrderKey.class), TypeInformation.of(PurchaseOrder.class)))
                 .sinkTo(sink2);
+
 
         env.execute();
 
