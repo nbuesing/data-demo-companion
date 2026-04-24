@@ -21,6 +21,12 @@ select venueid, sum(capacity) from foo group by 1
 explain plan for select venueid, sum(capacity) from foo group by 1
 ```
 
+manually disabling STI
+```
+select venueid, sum(capacity) from foo group by 1
+OPTION(useStarTree=false)
+```
+
 update data-demo/mockdata-daemon to produce more events, here is an example:
 
 KafkaDaemon

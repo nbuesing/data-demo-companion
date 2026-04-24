@@ -63,6 +63,7 @@ services:
     image: apachepinot/pinot:${VERSION}
     hostname: pinot-server
     container_name: pinot-server
+    privileged: true
     command: "StartServer -clusterName 'Pinot' -zkAddress pinot-zookeeper:2181 -config /opt/pinot/configs/pinot-server.conf"
 #    command: "StartServer -clusterName 'Pinot' -zkAddress pinot-zookeeper:2181 -config /opt/pinot/configs/pinot-server.conf -segmentDir /opt/pinot/data/pinotSegments -dataDir /opt/pinot/data/pinotServerData"
     restart: unless-stopped

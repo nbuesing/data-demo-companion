@@ -15,17 +15,20 @@
   },
   "tableIndexConfig": {
 
-    "starTreeIndexConfigs": [{
-      "dimensionsSplitOrder": [
-        "venueid"
-      ],
-      "skipStarNodeCreationForDimensions": [
-      ],
-      "functionColumnPairs": [
-        "SUM__capacity"
-      ],
-      "maxLeafRecords": 10
-    }],
+    "starTreeIndexConfigs": [
+      {
+        "dimensionsSplitOrder": [
+          "venueid",
+          "artistid"
+        ],
+        "skipStarNodeCreationForDimensions": [
+        ],
+        "functionColumnPairs": [
+          "SUM__capacity"
+        ],
+        "maxLeafRecords": 1000
+      }
+    ],
 
     "invertedIndexColumns": [],
     "rangeIndexColumns": [],
@@ -47,9 +50,9 @@
     "noDictionaryColumns": [],
     "onHeapDictionaryColumns": [],
     "varLengthDictionaryColumns": [],
-    "enableDefaultStarTree": true,
-    "enableDynamicStarTreeCreation": true,
-    "aggregateMetrics": true,
+    "enableDefaultStarTree": false,
+    "enableDynamicStarTreeCreation": false,
+    "aggregateMetrics": false,
     "nullHandlingEnabled": false
   },
   "metadata": {},
